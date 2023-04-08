@@ -18,6 +18,7 @@ const Cards = () => {
   });
   const [imageUrl,setImageUrl] = useState('Female01.jpg');
    const [loading,setLoading] = useState(true);
+   const [flag,setFlag] = useState(true);
    const [filter,setFilter] = useState({
       Location:'',
       Gender:'',
@@ -77,13 +78,11 @@ const Cards = () => {
         }
              
         const dataFromfirebase = await getDocs(q);
-        console.log(dataFromfirebase);
         setData([]);
         dataFromfirebase.forEach((doc)=>{
             if(doc.data().Gender == 'Male'){
               countMale++;
-              console.log(doc.data().Name);
-              console.log(doc.data().ID);
+            
             }
             else{
               countFemale++;
@@ -91,6 +90,12 @@ const Cards = () => {
             setData((previous)=> [...previous,{...(doc.data()),id: doc.id}]);
             useAppstate.setUser({noOfFemale:countFemale,noOfMale:countMale});
         });
+        if(data.length == 0){
+          setFlag(true)
+        }
+        else{
+          setFlag(false)
+        }
         setLoading(false);
      }
        getData();
@@ -140,7 +145,7 @@ const Cards = () => {
               <Filter setFilter ={setFilter}/>
             </div>
              <div className='overflow-y-scroll h-full no-scrollbar  w-full'>
-                { data.map((e,i)=>{
+                {flag ? data.map((e,i)=>{
                     return (
                       <button key={i} className='w-full' onClick={()=>setinfo(e)}>
                       <div  className='flex flex-col text-sm md:text-lg h-18 w-full p-1 lg:px-2 border-4 border-cyan-50 bg-slate-300 focus:outline-none hover:bg-slate-400'>
@@ -154,7 +159,8 @@ const Cards = () => {
                         </div>
                         </button>
                         )
-                    }) 
+                    }) :
+                    <img className='h-full' src='https://i.pinimg.com/564x/ac/70/60/ac70602b36fa577cd5e563a958cd6b7e.jpg'/>
                 }     
              </div>            
           </div>

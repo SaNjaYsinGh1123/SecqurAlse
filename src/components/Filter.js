@@ -21,7 +21,6 @@ export default function Filter({setFilter}) {
       }
     }
     const filterApply =()=>{
-        console.log('d',form.Date);
         setFilter({
             Location: form.Location,
             Gender : form.Gender,
