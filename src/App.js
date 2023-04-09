@@ -15,7 +15,7 @@ const App = ()=>{
  
   const [user,setUser] = useState({
     noOfFemale:'0',
-    noOfMale : '0'
+    noOfMale :'0'
   });
   useEffect(()=>{
 

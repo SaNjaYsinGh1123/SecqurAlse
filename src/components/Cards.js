@@ -88,17 +88,19 @@ const Cards = () => {
               countFemale++;
             }
             setData((previous)=> [...previous,{...(doc.data()),id: doc.id}]);
-            useAppstate.setUser({noOfFemale:countFemale,noOfMale:countMale});
-        });
-        if(data.length == 0){
-          setFlag(true)
-        }
-        else{
+          });
+        useAppstate.setUser({noOfFemale:countFemale,noOfMale:countMale});
+        var count = countMale + countFemale;
+        if(count === 0){
           setFlag(false)
         }
+        else{
+          setFlag(true)
+        }  
         setLoading(false);
-     }
-       getData();
+      }
+      
+     getData();
   },[filter]);
   return (
     <div className='flex flex-col w-full md:flex-row justify-between px-1 mt-2 h-5/6'>
@@ -113,7 +115,7 @@ const Cards = () => {
               <img  className='h-4 mb-4' src={'../Images/move.png'}/>
             </div>           
           </div>
-          <div className='flex h-full w-full p-1 md:w-2/5'>
+          <div className='flex h-3/5 md:h-full w-full p-1 md:w-2/5'>
             <div className=''>
                   <div className='mb-1 '>
                   <h1>{form.ID}</h1>
@@ -123,7 +125,6 @@ const Cards = () => {
                     <p>Name: {form.Name}</p>
                     <p>Location: {form.Location} </p>
                     <p>Date: {form.Date} </p>
-                    <p>Time: {form.Time} </p>
                     
                   </div>
                   <div className='mb-1'>
@@ -140,12 +141,12 @@ const Cards = () => {
              </div>
           </div>
           <div className='flex border-8 border-slate-300 md:w-2/5 w-full h-full flex-col'>
-            <div className='flex h-16 w-full p-1'>
-              <h1 className='font-bold text-xl'>Events</h1>
+          <div className='flex h-16 w-full p-1 border-4 border-cyan-50 bg-slate-100'>
+              <h1 className='font-bold text-xl pl-1'>Events</h1>
               <Filter setFilter ={setFilter}/>
             </div>
              <div className='overflow-y-scroll h-full no-scrollbar  w-full'>
-                {flag ? data.map((e,i)=>{
+                {flag ? (data.map((e,i)=>{
                     return (
                       <button key={i} className='w-full' onClick={()=>setinfo(e)}>
                       <div  className='flex flex-col text-sm md:text-lg h-18 w-full p-1 lg:px-2 border-4 border-cyan-50 bg-slate-300 focus:outline-none hover:bg-slate-400'>
@@ -159,7 +160,7 @@ const Cards = () => {
                         </div>
                         </button>
                         )
-                    }) :
+                    }) ):
                     <img className='h-full' src='https://i.pinimg.com/564x/ac/70/60/ac70602b36fa577cd5e563a958cd6b7e.jpg'/>
                 }     
              </div>            

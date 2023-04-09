@@ -166,13 +166,6 @@ footer .icon {
   font-size: 20px;
   margin-left: 10px;
 }
-@media screen and (max-width: 768px) {
-  .grid3,
-  .grid {
-    /* grid-template-columns: repeat(2, 1fr); */
-     grid-template-columns: repeat(1, 1fr);
-  }
-}
 .link {
   color: #000;
 }
@@ -192,5 +185,17 @@ footer .icon {
 } */
 
 .pi{
-  height: 78vh;
+  position: relative;
+  height: 95%;
+}
+
+@media screen and (max-width: 768px) {
+  .grid3,
+  .grid {
+    /* grid-template-columns: repeat(2, 1fr); */
+     grid-template-columns: repeat(1, 1fr);
+  }
+  .pi{
+    height: 90%;
+  }
 }
